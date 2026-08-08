@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Management - Hospital Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-icon">🏥</div>
+            <h2>Hospital Management</h2>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="dashboard.html">📊 Dashboard</a>
+            <a href="patients.html">👥 Patients</a>
+            <a href="doctors.html">👨‍⚕️ Doctors</a>
+            <a href="appointments.html">📅 Appointments</a>
+            <a href="beds.html">🛏️ Beds</a>
+            <a href="pharmacy.html">💊 Pharmacy</a>
+            <a href="billing.html" class="active">💰 Billing</a>
+            <a href="analytics.html">📈 Analytics</a>
+            <a href="reports.html">📑 Reports</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html">🚪 Logout</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="top-header">
+            <div>
+                <h1>Billing Management</h1>
+                <p>Manage patient bills and payments</p>
+            </div>
+
+            <div class="user-info">
+                <span>👤</span>
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Hospital Admin</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- BILLING STATISTICS -->
+        <section class="summary-cards">
+            <div class="summary-card">
+                <div class="card-icon">🧾</div>
+                <div>
+                    <h3>Total Bills</h3>
+                    <p id="totalBills">0</p>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon">💰</div>
+                <div>
+                    <h3>Total Billed</h3>
+                    <p id="totalBilled">₹0</p>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon">✅</div>
+                <div>
+                    <h3>Paid Amount</h3>
+                    <p id="paidAmount">₹0</p>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon">⏳</div>
+                <div>
+                    <h3>Pending Amount</h3>
+                    <p id="pendingAmount">₹0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADD NEW BILL -->
+        <section class="dashboard-card">
+            <div class="card-header">
+                <div>
+                    <h2>Create New Bill</h2>
+                    <p>Enter billing information below</p>
+                </div>
+            </div>
+
+            <form id="billingForm">
+                <div class="form-grid">
+                    <!-- BILL ID -->
+                    <div class="form-group">
+                        <label for="billId">Bill ID</label>
+                        <input type="text" id="billId" placeholder="Example: BILL001" required>
+                    </div>
+
+                    <!-- PATIENT -->
+                    <div class="form-group">
+                        <label for="billPatient">Patient Name</label>
+                        <input type="text" id="billPatient" placeholder="Enter patient name" required>
+                    </div>
+
+                    <!-- PATIENT ID -->
+                    <div class="form-group">
+                        <label for="billPatientId">Patient ID</label>
+                        <input type="text" id="billPatientId" placeholder="Example: P001" required>
+                    </div>
+
+                    <!-- DOCTOR -->
+                    <div class="form-group">
+                        <label for="billDoctor">Doctor</label>
+                        <select id="billDoctor" required>
+                            <option value="">Select Doctor</option>
+                            <option value="Dr. Ananya Rao">Dr. Ananya Rao</option>
+                            <option value="Dr. Vikram Singh">Dr. Vikram Singh</option>
+                            <option value="Dr. Meera Nair">Dr. Meera Nair</option>
+                            <option value="Dr. Kiran Kumar">Dr. Kiran Kumar</option>
+                        </select>
+                    </div>
+
+                    <!-- SERVICE -->
+                    <div class="form-group">
+                        <label for="billService">Service / Treatment</label>
+                        <select id="billService" required>
+                            <option value="">Select Service</option>
+                            <option value="Consultation">Consultation</option>
+                            <option value="Laboratory Test">Laboratory Test</option>
+                            <option value="X-Ray">X-Ray</option>
+                            <option value="Ultrasound">Ultrasound</option>
+                            <option value="Surgery">Surgery</option>
+                            <option value="Hospital Room">Hospital Room</option>
+                            <option value="Pharmacy">Pharmacy</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- AMOUNT -->
+                    <div class="form-group">
+                        <label for="billAmount">Amount (₹)</label>
+                        <input type="number" id="billAmount" placeholder="Enter amount" min="0" step="0.01" required>
+                    </div>
+
+                    <!-- BILL DATE -->
+                    <div class="form-group">
+                        <label for="billDate">Bill Date</label>
+                        <input type="date" id="billDate" required>
+                    </div>
+
+                    <!-- PAYMENT STATUS -->
+                    <div class="form-group">
+                        <label for="billStatus">Payment Status</label>
+                        <select id="billStatus" required>
+                            <option value="">Select Status</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Partial">Partial</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="form-actions">
+                    <button type="reset" class="cancel-btn">Clear</button>
+                    <button type="submit" class="save-patient-btn">💰 Create Bill</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- BILL LIST -->
+        <section class="dashboard-card">
+            <div class="patient-toolbar">
+                <div>
+                    <h2>Billing Records</h2>
+                    <p>View and search patient billing records</p>
+                </div>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="patient-search">
+                <input type="text" id="billSearch" placeholder="Search by Bill ID, patient name, patient ID or service...">
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-container">
+                <table id="billingTable">
+                    <thead>
+                        <tr>
+                            <th>Bill ID</th>
+                            <th>Patient</th>
+                            <th>Patient ID</th>
+                            <th>Doctor</th>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="billingTableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- EMPTY MESSAGE -->
+            <div id="noBillsMessage" class="no-patients-message">
+                <div>🧾</div>
+                <h3>No Billing Records Found</h3>
+                <p>Create a bill to see the record here.</p>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+<!-- SUCCESS POPUP -->
+<div id="billingMessage" class="patient-message-overlay">
+    <div class="patient-message-box">
+        <div class="message-icon">✓</div>
+        <h2>Bill Created Successfully</h2>
+        <p>The patient bill has been successfully created.</p>
+
+        <div class="message-actions">
+            <button type="button" id="closeBillingMessage" class="close-message-btn">Done</button>
+        </div>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script src="js/billing.js"></script>
+
+</body>
+</html>

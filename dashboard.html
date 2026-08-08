@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-icon">🏥</div>
+        <h2>Hospital Management</h2>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="active">📊 Dashboard</a>
+        <a href="patients.html">👥 Patients</a>
+        <a href="doctors.html">👨‍⚕️ Doctors</a>
+        <a href="appointments.html" id="navAppointments">📅 Appointments</a>
+        <a href="beds.html">🛏️ Beds</a>
+        <a href="pharmacy.html">💊 Pharmacy</a>
+        <a href="billing.html">💰 Billing</a>
+        <a href="analytics.html">📈 Analytics</a>
+        <a href="reports.html">📑 Reports</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#" id="sidebarLogout">🚪 Logout</a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div>
+          <h1>Hospital Dashboard</h1>
+          <p>Welcome back, <span id="welcomeAdminName">Administrator</span> 👋</p>
+        </div>
+
+        <div class="header-right">
+          <div class="live-date">
+            <span id="currentDate"></span>
+          </div>
+
+          <div class="live-time">
+            <span id="currentTime"></span>
+          </div>
+
+          <div class="notification">
+            🔔
+            <span class="notification-badge">3</span>
+          </div>
+
+          <!-- INTERACTIVE ADMIN PROFILE DROPDOWN CONTAINER -->
+          <div class="admin-profile-container">
+            <div class="user-info" id="adminProfileTrigger">
+              <span id="headerAdminAvatar">👤</span>
+              <div>
+                <strong id="headerAdminName">Administrator</strong>
+                <small id="headerAdminRole">Hospital Admin</small>
+              </div>
+              <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+            </div>
+
+            <!-- DROPDOWN MENU -->
+            <div class="profile-dropdown-menu" id="profileDropdown">
+              <div class="dropdown-header">
+                <strong id="dropdownAdminName">Administrator</strong>
+                <small id="dropdownAdminEmail">admin@hospital.com</small>
+              </div>
+              <hr class="dropdown-divider">
+              <a href="#" class="dropdown-item" id="btnViewProfile">
+                <i class="fa-solid fa-user-gear"></i> View Profile
+              </a>
+              <a href="#" class="dropdown-item" id="btnChangePassword">
+                <i class="fa-solid fa-key"></i> Change Password
+              </a>
+              <hr class="dropdown-divider">
+              <a href="#" class="dropdown-item logout-item" id="btnLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- SUMMARY CARDS -->
+      <section class="summary-cards">
+        <!-- TOTAL PATIENTS -->
+        <div class="summary-card" id="patientsCard">
+          <div class="card-icon">👥</div>
+          <div>
+            <h3>Total Patients</h3>
+            <p id="dashboardTotalPatients">0</p>
+          </div>
+        </div>
+
+        <!-- TOTAL DOCTORS -->
+        <div class="summary-card" id="doctorsCard">
+          <div class="card-icon">👨‍⚕️</div>
+          <div>
+            <h3>Total Doctors</h3>
+            <p id="dashboardTotalDoctors">0</p>
+          </div>
+        </div>
+
+        <!-- APPOINTMENTS -->
+        <div class="summary-card" id="appointmentsCard">
+          <div class="card-icon">📅</div>
+          <div>
+            <h3>Appointments</h3>
+            <p id="dashboardAppointmentCount">0</p>
+          </div>
+        </div>
+
+        <!-- AVAILABLE BEDS -->
+        <div class="summary-card" id="bedsCard">
+          <div class="card-icon">🛏️</div>
+          <div>
+            <h3>Available Beds</h3>
+            <p id="dashboardAvailableBeds">0</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD CONTENT -->
+      <section class="dashboard-grid">
+        <!-- RECENT APPOINTMENTS -->
+        <div class="dashboard-card">
+          <div class="card-header">
+            <h2>Recent Appointments</h2>
+            <span>Today</span>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Department</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dashboardAppointmentTableBody">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+
+          <div id="dashboardNoAppointments" class="no-patients-message">
+            <div>📅</div>
+            <h3>No Appointments Found</h3>
+            <p>No appointments have been scheduled yet.</p>
+          </div>
+        </div>
+
+        <!-- HOSPITAL OVERVIEW -->
+        <div class="dashboard-card" style="padding: 20px;">
+          <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 16px; margin-bottom: 2px;">Hospital Overview</h2>
+            <p style="color: var(--text-secondary); font-size: 12px;">Real-time operational capacity metrics</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <!-- Occupied Beds -->
+            <div class="perf-metric-box" style="padding: 12px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+                <span style="font-weight: 600; color: #1e293b;">Occupied Beds</span>
+                <span id="dashBedUtilVal" style="font-weight: 700; color: #d97706;">78%</span>
+              </div>
+              <div class="progress-bar-container" style="width: 100%; height: 7px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                <div class="progress-bar-fill" id="dashBedUtilBar" style="width: 78%; height: 100%; background: #d97706; border-radius: 10px; transition: width 1s ease;"></div>
+              </div>
+            </div>
+
+            <!-- Available Doctors -->
+            <div class="perf-metric-box" style="padding: 12px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+                <span style="font-weight: 600; color: #1e293b;">Available Doctors</span>
+                <span id="dashDocAvailVal" style="font-weight: 700; color: #7c3aed;">64%</span>
+              </div>
+              <div class="progress-bar-container" style="width: 100%; height: 7px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                <div class="progress-bar-fill" id="dashDocAvailBar" style="width: 64%; height: 100%; background: #7c3aed; border-radius: 10px; transition: width 1s ease;"></div>
+              </div>
+            </div>
+
+            <!-- Pharmacy Stock -->
+            <div class="perf-metric-box" style="padding: 12px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+                <span style="font-weight: 600; color: #1e293b;">Pharmacy Stock</span>
+                <span id="dashPharmVal" style="font-weight: 700; color: #059669;">82%</span>
+              </div>
+              <div class="progress-bar-container" style="width: 100%; height: 7px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                <div class="progress-bar-fill" id="dashPharmBar" style="width: 82%; height: 100%; background: #059669; border-radius: 10px; transition: width 1s ease;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- MODAL 1: VIEW / EDIT ADMIN PROFILE -->
+  <div class="patient-message-overlay" id="profileModal">
+    <div class="patient-message-box profile-modal-box">
+      <div class="modal-header">
+        <h2>Admin Profile</h2>
+        <button class="close-modal-btn" id="closeProfileModal">&times;</button>
+      </div>
+
+      <form id="adminProfileForm">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="editAdminName" required>
+        </div>
+        <div class="input-group">
+          <label>Email Address</label>
+          <input type="email" id="editAdminEmail" required>
+        </div>
+        <div class="input-group">
+          <label>Role</label>
+          <input type="text" id="editAdminRole" readonly style="background: #f1f5f9; cursor: not-allowed;">
+        </div>
+
+        <div class="form-actions" style="margin-top: 20px; gap: 10px;">
+          <button type="button" class="cancel-btn" id="cancelProfileBtn">Cancel</button>
+          <button type="submit" class="add-patient-btn">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: CHANGE PASSWORD -->
+  <div class="patient-message-overlay" id="passwordModal">
+    <div class="patient-message-box profile-modal-box">
+      <div class="modal-header">
+        <h2>Change Password</h2>
+        <button class="close-modal-btn" id="closePasswordModal">&times;</button>
+      </div>
+
+      <form id="changePasswordForm">
+        <div class="input-group">
+          <label>Current Password</label>
+          <input type="password" id="currentPassword" placeholder="Enter current password" required>
+        </div>
+        <div class="input-group">
+          <label>New Password</label>
+          <input type="password" id="newPassword" placeholder="Enter new password" required>
+        </div>
+        <div class="input-group">
+          <label>Confirm New Password</label>
+          <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
+        </div>
+
+        <p id="passwordMsg" style="font-size: 13px; margin-bottom: 12px; font-weight: 600;"></p>
+
+        <div class="form-actions" style="gap: 10px;">
+          <button type="button" class="cancel-btn" id="cancelPasswordBtn">Cancel</button>
+          <button type="submit" class="add-patient-btn">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT SCRIPTS -->
+  <script src="js/profile.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/seed.js"></script>
+</body>
+
+</html>

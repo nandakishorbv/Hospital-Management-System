@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Hospital Management System</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="login-body">
+
+  <!-- BACKGROUND ANIMATION -->
+  <div class="background-animation">
+    <span>🏥</span>
+    <span>💊</span>
+    <span>🩺</span>
+    <span>❤️</span>
+    <span>➕</span>
+    <span>🏥</span>
+  </div>
+
+  <!-- LOGIN CARD -->
+  <div class="login-container">
+    <div class="login-card">
+
+      <div class="hospital-logo">🏥</div>
+
+      <h1>Hospital Management</h1>
+      <p class="subtitle">Healthcare Analytics System</p>
+
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter Username" required>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter Password" required>
+        </div>
+
+        <button type="submit" id="loginButton">Login</button>
+
+        <p id="loginMessage"></p>
+      </form>
+
+      <div class="login-footer">
+        Hospital Management & Healthcare Analytics System
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUCCESS LOADING SCREEN -->
+  <div id="loadingScreen" class="loading-screen" style="display: none;">
+    <div class="loading-box">
+      <div class="hospital-loader">🏥</div>
+      <h2>Login Successful</h2>
+      <p>Redirecting to Dashboard...</p>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT FOR AUTHENTICATION -->
+  <script src="js/auth.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Details - Hospital Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-icon">🏥</div>
+        <h2>Hospital Management</h2>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="patients.html" class="active">👥 Patients</a>
+        <a href="doctors.html">👨‍⚕️ Doctors</a>
+        <a href="appointments.html">📅 Appointments</a>
+        <a href="beds.html">🛏️ Beds</a>
+        <a href="pharmacy.html">💊 Pharmacy</a>
+        <a href="billing.html">💰 Billing</a>
+        <a href="analytics.html">📈 Analytics</a>
+        <a href="reports.html">📑 Reports</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html">🚪 Logout</a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- HEADER -->
+      <header class="top-header">
+        <div>
+          <h1>Patient Details</h1>
+          <p>View complete patient information</p>
+        </div>
+
+        <div class="user-info">
+          <span>👤</span>
+          <div>
+            <strong>Administrator</strong>
+            <small>Hospital Admin</small>
+          </div>
+        </div>
+      </header>
+
+      <!-- PATIENT DETAILS CARD -->
+      <section class="dashboard-card">
+
+        <div class="card-header">
+          <div>
+            <h2>Patient Information</h2>
+            <p>Complete patient medical details</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="detailPatientId">Patient ID</label>
+            <input type="text" id="detailPatientId" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailPatientName">Patient Name</label>
+            <input type="text" id="detailPatientName" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailPatientAge">Age</label>
+            <input type="text" id="detailPatientAge" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailPatientGender">Gender</label>
+            <input type="text" id="detailPatientGender" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailBloodGroup">Blood Group</label>
+            <input type="text" id="detailBloodGroup" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailDepartment">Department</label>
+            <input type="text" id="detailDepartment" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailPhone">Phone Number</label>
+            <input type="text" id="detailPhone" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailStatus">Status</label>
+            <input type="text" id="detailStatus" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailDoctor">Assigned Doctor</label>
+            <input type="text" id="detailDoctor" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="detailAdmissionDate">Admission Date</label>
+            <input type="text" id="detailAdmissionDate" readonly>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <a href="patients.html" class="cancel-btn">← Back to Patients</a>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="js/patient-details.js"></script>
+
+</body>
+
+</html>

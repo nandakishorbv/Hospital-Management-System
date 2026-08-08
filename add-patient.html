@@ -1,0 +1,122 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    const patientForm = document.getElementById("patientForm");
+    const patientMessage = document.getElementById("patientMessage");
+    const messageBox = document.querySelector(".patient-message-box");
+    const messageIcon = document.getElementById("messageIcon");
+    const messageTitle = document.getElementById("messageTitle");
+    const messageText = document.getElementById("messageText");
+    const closeMessageBtn = document.getElementById("closeMessageBtn");
+    const viewPatientsBtn = document.getElementById("viewPatientsBtn");
+
+    /* =========================================
+        GET EXISTING PATIENTS
+    ========================================== */
+    function getPatients() {
+        try {
+            return JSON.parse(localStorage.getItem("hospitalPatients")) || [];
+        } catch (e) {
+            console.error("Error parsing hospitalPatients from localStorage:", e);
+            return [];
+        }
+    }
+
+    /* =========================================
+        SHOW POPUP MESSAGE
+    ========================================== */
+    function showPatientMessage(type, icon, title, text) {
+        if (!patientMessage || !messageBox || !messageIcon || !messageTitle || !messageText) {
+            return;
+        }
+
+        messageBox.classList.remove("error");
+
+        if (type === "error") {
+            messageBox.classList.add("error");
+        }
+
+        messageIcon.textContent = icon;
+        messageTitle.textContent = title;
+        messageText.textContent = text;
+
+        patientMessage.classList.add("show");
+    }
+
+    /* =========================================
+        SUBMIT FORM
+    ========================================== */
+    if (patientForm) {
+        patientForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const getValue = (id) => {
+                const element = document.getElementById(id);
+                return element ? element.value.trim() : "";
+            };
+
+            const patient = {
+                id: getValue("patientId").toUpperCase(),
+                name: getValue("patientName"),
+                age: getValue("patientAge"),
+                gender: getValue("patientGender"),
+                bloodGroup: getValue("bloodGroup"),
+                phone: getValue("phone"),
+                guardianName: getValue("guardianName"),
+                guardianRelation: getValue("guardianRelation"),
+                guardianPhone: getValue("guardianPhone"),
+                department: getValue("department"),
+                status: getValue("status"),
+                address: getValue("address"),
+                createdDate: new Date().toISOString()
+            };
+
+            const patients = getPatients();
+
+            /* DUPLICATE ID CHECK */
+            const isDuplicate = patients.some(
+                (existing) => String(existing.id || "").toLowerCase() === patient.id.toLowerCase()
+            );
+
+            if (isDuplicate) {
+                showPatientMessage(
+                    "error",
+                    "!",
+                    "Patient ID Already Exists",
+                    "A patient with ID '" + patient.id + "' is already registered. Please use a unique Patient ID."
+                );
+                return;
+            }
+
+            /* SAVE TO LOCALSTORAGE */
+            patients.push(patient);
+            localStorage.setItem("hospitalPatients", JSON.stringify(patients));
+
+            /* SUCCESS POPUP */
+            showPatientMessage(
+                "success",
+                "✓",
+                "Patient Added Successfully",
+                patient.name + " (" + patient.id + ") has been successfully registered."
+            );
+
+            patientForm.reset();
+        });
+    }
+
+    /* =========================================
+        POPUP BUTTON LISTENERS
+    ========================================== */
+    if (closeMessageBtn) {
+        closeMessageBtn.addEventListener("click", function () {
+            if (patientMessage) {
+                patientMessage.classList.remove("show");
+            }
+        });
+    }
+
+    if (viewPatientsBtn) {
+        viewPatientsBtn.addEventListener("click", function () {
+            window.location.href = "patients.html";
+        });
+    }
+});

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Management - Hospital Management System</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- =========================================
+             SIDEBAR
+        ========================================== -->
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <div class="sidebar-icon">🏥</div>
+                <h2>Hospital Management</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html">📊 Dashboard</a>
+                <a href="patients.html">👥 Patients</a>
+                <a href="doctors.html">👨‍⚕️ Doctors</a>
+                <a href="appointments.html">📅 Appointments</a>
+                <a href="beds.html">🛏️ Beds</a>
+                <a href="pharmacy.html" class="active">💊 Pharmacy</a>
+                <a href="billing.html">💰 Billing</a>
+                <a href="analytics.html">📈 Analytics</a>
+                <a href="reports.html">📑 Reports</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html">🚪 Logout</a>
+            </div>
+
+        </aside>
+
+        <!-- =========================================
+             MAIN CONTENT
+        ========================================== -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="top-header">
+                <div>
+                    <h1>Pharmacy Management</h1>
+                    <p>Manage medicines and pharmacy inventory</p>
+                </div>
+
+                <div class="user-info">
+                    <span>👤</span>
+                    <div>
+                        <strong>Administrator</strong>
+                        <small>Hospital Admin</small>
+                    </div>
+                </div>
+            </header>
+
+            <!-- =====================================
+                 PHARMACY STATISTICS
+            ====================================== -->
+            <section class="summary-cards">
+
+                <!-- TOTAL MEDICINES -->
+                <div class="summary-card">
+                    <div class="card-icon">💊</div>
+                    <div>
+                        <h3>Total Medicines</h3>
+                        <p id="totalMedicines">0</p>
+                    </div>
+                </div>
+
+                <!-- AVAILABLE STOCK -->
+                <div class="summary-card">
+                    <div class="card-icon">🟢</div>
+                    <div>
+                        <h3>Available Stock</h3>
+                        <p id="availableStock">0</p>
+                    </div>
+                </div>
+
+                <!-- LOW STOCK -->
+                <div class="summary-card">
+                    <div class="card-icon">⚠️</div>
+                    <div>
+                        <h3>Low Stock</h3>
+                        <p id="lowStock">0</p>
+                    </div>
+                </div>
+
+                <!-- EXPIRED -->
+                <div class="summary-card">
+                    <div class="card-icon">🔴</div>
+                    <div>
+                        <h3>Expired</h3>
+                        <p id="expiredMedicines">0</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- =====================================
+                 ADD MEDICINE FORM
+            ====================================== -->
+            <section class="dashboard-card">
+
+                <div class="card-header">
+                    <div>
+                        <h2>Add New Medicine</h2>
+                        <p>Enter medicine information below</p>
+                    </div>
+                </div>
+
+                <form id="medicineForm">
+
+                    <div class="form-grid">
+
+                        <!-- MEDICINE ID -->
+                        <div class="form-group">
+                            <label for="medicineId">Medicine ID</label>
+                            <input type="text" id="medicineId" placeholder="Example: MED001" required>
+                        </div>
+
+                        <!-- MEDICINE NAME -->
+                        <div class="form-group">
+                            <label for="medicineName">Medicine Name</label>
+                            <input type="text" id="medicineName" placeholder="Enter medicine name" required>
+                        </div>
+
+                        <!-- CATEGORY -->
+                        <div class="form-group">
+                            <label for="medicineCategory">Category</label>
+                            <select id="medicineCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Capsule">Capsule</option>
+                                <option value="Syrup">Syrup</option>
+                                <option value="Injection">Injection</option>
+                                <option value="Ointment">Ointment</option>
+                                <option value="Drops">Drops</option>
+                            </select>
+                        </div>
+
+                        <!-- QUANTITY -->
+                        <div class="form-group">
+                            <label for="medicineQuantity">Quantity</label>
+                            <input type="number" id="medicineQuantity" min="0" placeholder="Enter quantity" required>
+                        </div>
+
+                        <!-- PRICE -->
+                        <div class="form-group">
+                            <label for="medicinePrice">Price per Unit</label>
+                            <input type="number" id="medicinePrice" min="0" step="0.01" placeholder="Enter price" required>
+                        </div>
+
+                        <!-- EXPIRY DATE -->
+                        <div class="form-group">
+                            <label for="medicineExpiry">Expiry Date</label>
+                            <input type="date" id="medicineExpiry" required>
+                        </div>
+
+                        <!-- SUPPLIER -->
+                        <div class="form-group">
+                            <label for="medicineSupplier">Supplier</label>
+                            <input type="text" id="medicineSupplier" placeholder="Enter supplier name" required>
+                        </div>
+
+                        <!-- MINIMUM STOCK -->
+                        <div class="form-group">
+                            <label for="medicineMinimumStock">Minimum Stock Level</label>
+                            <input type="number" id="medicineMinimumStock" min="1" placeholder="Example: 10" required>
+                        </div>
+
+                    </div>
+
+                    <!-- BUTTONS -->
+                    <div class="form-actions">
+                        <button type="reset" class="cancel-btn">Clear</button>
+                        <button type="submit" class="save-patient-btn">💊 Add Medicine</button>
+                    </div>
+
+                </form>
+
+            </section>
+
+            <!-- =====================================
+                 MEDICINE INVENTORY TABLE
+            ====================================== -->
+            <section class="dashboard-card">
+
+                <div class="patient-toolbar">
+                    <div>
+                        <h2>Medicine Inventory</h2>
+                        <p>Medicine records and stock information</p>
+                    </div>
+                </div>
+
+                <!-- SEARCH -->
+                <div class="patient-search">
+                    <input type="text" id="medicineSearch" placeholder="Search by medicine name, ID, category or supplier...">
+                </div>
+
+                <!-- TABLE -->
+                <div class="table-container">
+                    <table id="medicineTable">
+                        <thead>
+                            <tr>
+                                <th>Medicine ID</th>
+                                <th>Medicine Name</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Expiry Date</th>
+                                <th>Supplier</th>
+                                <th>Status</th>
+                                <th>Actions</th> <!-- MATCHED WITH JS DELETE BUTTON -->
+                            </tr>
+                        </thead>
+                        <tbody id="medicineTableBody">
+                            <!-- Populated dynamically by js/pharmacy.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- EMPTY MESSAGE -->
+                <div id="noMedicinesMessage" class="no-patients-message">
+                    <div>💊</div>
+                    <h3>No Medicines Found</h3>
+                    <p>Add a medicine to see the record here.</p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- =========================================
+         SUCCESS POPUP / MODAL
+    ========================================= -->
+    <div id="medicineMessage" class="patient-message-overlay">
+        <div class="patient-message-box">
+            <div class="message-icon">✓</div>
+            <h2 id="medicineMessageTitle">Medicine Added Successfully</h2>
+            <p id="medicineMessageText">Medicine has been successfully added to the pharmacy inventory.</p>
+            <div class="message-actions">
+                <button type="button" id="closeMedicineMessage" class="close-message-btn">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="./js/pharmacy.js"></script>
+
+</body>
+
+</html>

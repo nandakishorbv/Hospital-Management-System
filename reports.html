@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Hospital Management System</title>
+    
+    <!-- CSS stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reports.css">
+    
+    <!-- Font Awesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- =========================================
+             SIDEBAR
+        ========================================== -->
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <div class="sidebar-icon">🏥</div>
+                <h2>Hospital<br>Management</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="patients.html"><i class="fa-solid fa-users"></i> Patients</a>
+                <a href="doctors.html"><i class="fa-solid fa-user-doctor"></i> Doctors</a>
+                <a href="appointments.html"><i class="fa-solid fa-calendar-check"></i> Appointments</a>
+                <a href="beds.html"><i class="fa-solid fa-bed"></i> Beds</a>
+                <a href="pharmacy.html"><i class="fa-solid fa-pills"></i> Pharmacy</a>
+                <a href="billing.html"><i class="fa-solid fa-file-invoice-dollar"></i> Billing</a>
+                <a href="analytics.html"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+                <a href="reports.html" class="active"><i class="fa-solid fa-file-lines"></i> Reports</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" id="sidebarLogout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+
+        </aside>
+
+        <!-- =========================================
+             MAIN CONTENT AREA
+        ========================================== -->
+        <main class="main-content">
+
+            <!-- TOP HEADER -->
+            <header class="top-header">
+                <div>
+                    <h1>System Reports</h1>
+                    <p>Generate, export, and review summarized healthcare data</p>
+                    <div class="report-timestamp-badge" style="margin-top: 6px;">
+                        <i class="fa-regular fa-clock"></i> Generated On: <span id="reportGeneratedTime">07 August 2026 | 07:10 PM</span>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <!-- ADMIN PROFILE CONTAINER -->
+                    <div class="admin-profile-container">
+                        <div class="user-info" id="adminProfileTrigger">
+                            <span class="user-avatar">👤</span>
+                            <div>
+                                <strong id="headerAdminName">Administrator</strong>
+                                <small id="headerAdminRole">Hospital Admin</small>
+                            </div>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </div>
+
+                        <!-- DROPDOWN MENU -->
+                        <div class="profile-dropdown-menu" id="profileDropdown">
+                            <div class="dropdown-header">
+                                <strong id="dropdownAdminName">Administrator</strong>
+                                <small id="dropdownAdminEmail">admin@hospital.com</small>
+                            </div>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item" id="btnViewProfile">
+                                <i class="fa-solid fa-user-gear"></i> View Profile
+                            </a>
+                            <a href="#" class="dropdown-item" id="btnChangePassword">
+                                <i class="fa-solid fa-key"></i> Change Password
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item logout-item" id="btnLogout">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- =====================================
+                 EXPORT & PRINT CONTROLS TOOLBAR
+            ====================================== -->
+            <section class="dashboard-card export-toolbar-card" style="margin-bottom: 24px; padding: 18px 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h2 style="font-size: 16px; margin-bottom: 4px;"><i class="fa-solid fa-download"></i> Export Reports Center</h2>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Generate printable documentation or download complete summaries</p>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;" class="no-print">
+                        <button class="add-patient-btn" id="btnPrintReport" style="background: #0284c7;"><i class="fa-solid fa-print"></i> Print Report</button>
+                        <button class="add-patient-btn" id="btnDownloadComplete" style="background: #0d9488;"><i class="fa-solid fa-file-pdf"></i> Download Complete Hospital Report</button>
+                        <button class="add-patient-btn" id="btnExportPatient" style="background: #4f46e5; font-size: 12px; padding: 8px 14px;">Export Patients</button>
+                        <button class="add-patient-btn" id="btnExportDoctor" style="background: #8b5cf6; font-size: 12px; padding: 8px 14px;">Export Doctors</button>
+                        <button class="add-patient-btn" id="btnExportBed" style="background: #f59e0b; font-size: 12px; padding: 8px 14px;">Export Beds</button>
+                        <button class="add-patient-btn" id="btnExportFinance" style="background: #10b981; font-size: 12px; padding: 8px 14px;">Export Financial</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =====================================
+                 REPORT SEARCH & FILTER TOOLBAR
+            ====================================== -->
+            <section class="dashboard-card filter-toolbar-card no-print" style="margin-bottom: 24px; padding: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: center;">
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <label style="font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px;">Search Report Data</label>
+                        <div style="position: relative;">
+                            <input type="text" id="reportSearchInput" placeholder="Search records..." style="padding-left: 36px; width: 100%;">
+                            <i class="fa-solid fa-search" style="position: absolute; left: 12px; top: 12px; color: #94a3b8;"></i>
+                        </div>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <label style="font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px;">Filter by Department</label>
+                        <select id="reportDeptFilter" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff;">
+                            <option value="">All Departments</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="General Medicine">General Medicine</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <label style="font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px;">Filter by Report Type</label>
+                        <select id="reportTypeFilter" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff;">
+                            <option value="all">All Sections</option>
+                            <option value="patients">Patient Summary</option>
+                            <option value="doctors">Doctor Directory</option>
+                            <option value="beds">Bed Occupancy</option>
+                            <option value="billing">Financial & Billing</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end; height: 100%;">
+                        <button class="add-patient-btn" id="btnResetFilters" style="background: #64748b; width: 100%; padding: 10px;"><i class="fa-solid fa-rotate-right"></i> Reset Filters</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =====================================
+                 1. PATIENT REPORTS SECTION
+            ====================================== -->
+            <section class="dashboard-card report-section-card" data-section="patients" style="margin-bottom: 24px;">
+                <div class="card-header">
+                    <div>
+                        <h2><i class="fa-solid fa-user-group" style="color: #0284c7; margin-right: 8px;"></i> Patient Summary Reports</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">Real-time breakdown of patient intake and admission statuses</p>
+                    </div>
+                </div>
+
+                <div class="summary-cards" style="margin-bottom: 20px;">
+                    <div class="summary-card stat-card-anim">
+                        <div class="card-icon" style="background: #e0f2fe; color: #0284c7;"><i class="fa-solid fa-users"></i></div>
+                        <div>
+                            <h3>Total Patients</h3>
+                            <p id="rptTotalPatients">0</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card stat-card-anim">
+                        <div class="card-icon" style="background: #dcfce7; color: #16a34a;"><i class="fa-solid fa-user-plus"></i></div>
+                        <div>
+                            <h3>Registered Today</h3>
+                            <p id="rptNewPatients">0</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card stat-card-anim">
+                        <div class="card-icon" style="background: #fef3c7; color: #d97706;"><i class="fa-solid fa-procedures"></i></div>
+                        <div>
+                            <h3>Admitted Patients</h3>
+                            <p id="rptAdmittedPatients">0</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card stat-card-anim">
+                        <div class="card-icon" style="background: #f3e8ff; color: #9333ea;"><i class="fa-solid fa-house-medical-check"></i></div>
+                        <div>
+                            <h3>Discharged Patients</h3>
+                            <p id="rptDischargedPatients">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="reportPatientTable">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Age / Gender</th>
+                                <th>Department</th>
+                                <th>Phone Number</th>
+                                <th>Admission Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportPatientTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- =====================================
+                 2. DOCTOR & BED REPORTS (GRID)
+            ====================================== -->
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+
+                <!-- DOCTOR REPORT CARD -->
+                <div class="dashboard-card report-section-card" data-section="doctors">
+                    <div class="card-header">
+                        <div>
+                            <h2><i class="fa-solid fa-user-doctor" style="color: #10b981; margin-right: 8px;"></i> Doctor Reports</h2>
+                            <p style="color: var(--text-secondary); font-size: 12.5px;">Staff availability & department distribution</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                        <div class="summary-card stat-card-anim" style="flex: 1; padding: 14px;">
+                            <div class="card-icon" style="background: #d1fae5; color: #059669; width: 38px; height: 38px; font-size: 16px;"><i class="fa-solid fa-user-doctor"></i></div>
+                            <div>
+                                <h3 style="font-size: 11px;">Total Doctors</h3>
+                                <p id="rptTotalDoctors" style="font-size: 20px;">0</p>
+                            </div>
+                        </div>
+                        <div class="summary-card stat-card-anim" style="flex: 1; padding: 14px;">
+                            <div class="card-icon" style="background: #dcfce7; color: #16a34a; width: 38px; height: 38px; font-size: 16px;"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h3 style="font-size: 11px;">Available Now</h3>
+                                <p id="rptAvailableDoctors" style="font-size: 20px;">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="reportDoctorTable">
+                            <thead>
+                                <tr>
+                                    <th>Doctor Name</th>
+                                    <th>Specialization</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportDoctorTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- BED REPORT CARD -->
+                <div class="dashboard-card report-section-card" data-section="beds">
+                    <div class="card-header">
+                        <div>
+                            <h2><i class="fa-solid fa-bed" style="color: #6366f1; margin-right: 8px;"></i> Bed Occupancy Reports</h2>
+                            <p style="color: var(--text-secondary); font-size: 12.5px;">Capacity & active bed allocation status</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                        <div class="summary-card stat-card-anim" style="flex: 1; padding: 12px;">
+                            <div class="card-icon" style="background: #e0e7ff; color: #4338ca; width: 32px; height: 32px; font-size: 14px;"><i class="fa-solid fa-bed"></i></div>
+                            <div>
+                                <h3 style="font-size: 10px;">Capacity</h3>
+                                <p id="rptTotalBeds" style="font-size: 18px;">0</p>
+                            </div>
+                        </div>
+                        <div class="summary-card stat-card-anim" style="flex: 1; padding: 12px;">
+                            <div class="card-icon" style="background: #fee2e2; color: #dc2626; width: 32px; height: 32px; font-size: 14px;"><i class="fa-solid fa-bed-pulse"></i></div>
+                            <div>
+                                <h3 style="font-size: 10px;">Occupied</h3>
+                                <p id="rptOccupiedBeds" style="font-size: 18px;">0</p>
+                            </div>
+                        </div>
+                        <div class="summary-card stat-card-anim" style="flex: 1; padding: 12px;">
+                            <div class="card-icon" style="background: #dcfce7; color: #15803d; width: 32px; height: 32px; font-size: 14px;"><i class="fa-solid fa-square-check"></i></div>
+                            <div>
+                                <h3 style="font-size: 10px;">Available</h3>
+                                <p id="rptAvailableBeds" style="font-size: 18px;">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="reportBedTable">
+                            <thead>
+                                <tr>
+                                    <th>Bed Number</th>
+                                    <th>Ward Type</th>
+                                    <th>Patient</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportBedTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- =====================================
+                 3. BILLING & REVENUE REPORTS
+            ====================================== -->
+            <section class="dashboard-card report-section-card" data-section="billing" style="margin-bottom: 24px;">
+                <div class="card-header">
+                    <div>
+                        <h2><i class="fa-solid fa-file-invoice-dollar" style="color: #f59e0b; margin-right: 8px;"></i> Financial & Billing Summary</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">Hospital revenue metrics and transaction summary</p>
+                    </div>
+                </div>
+
+                <div class="summary-cards" style="margin-bottom: 20px;">
+                    <div class="summary-card stat-card-anim">
+                        <div class="card-icon" style="background: #dcfce7; color: #15803d;"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                        <div>
+                            <h3>Total Revenue</h3>
+                            <p id="rptTotalRevenue">₹0</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card stat-card-anim">
+                        <div class="card-icon" style="background: #e0f2fe; color: #0369a1;"><i class="fa-solid fa-receipt"></i></div>
+                        <div>
+                            <h3>Total Invoices</h3>
+                            <p id="rptTotalInvoices">0</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card stat-card-anim">
+                        <div class="card-icon" style="background: #fef3c7; color: #b45309;"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <h3>Pending Invoices</h3>
+                            <p id="rptPendingInvoices">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="reportBillingTable">
+                        <thead>
+                            <tr>
+                                <th>Invoice ID</th>
+                                <th>Patient Name</th>
+                                <th>Services / Details</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportBillingTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- =====================================
+                 4. HOSPITAL PERFORMANCE OVERVIEW
+            ====================================== -->
+            <section class="dashboard-card performance-overview-card" style="margin-bottom: 30px; padding: 25px;">
+                <div class="card-header" style="margin-bottom: 20px;">
+                    <div>
+                        <h2>Hospital Performance Overview</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">Key efficiency metrics, utilization rates, and operational capacity</p>
+                    </div>
+                </div>
+
+                <div class="performance-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                    
+                    <div class="perf-metric-box">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; font-size: 14px; color: #1e293b;">Patient Growth</span>
+                            <span id="perfPatientGrowthVal" style="font-weight: 700; color: #0284c7;">85%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="perfPatientGrowthBar" style="width: 0%; background: #0284c7;"></div>
+                        </div>
+                        <small style="color: #64748b; font-size: 11px; margin-top: 6px; display: block;">Target monthly registration quota</small>
+                    </div>
+
+                    <div class="perf-metric-box">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; font-size: 14px; color: #1e293b;">Bed Utilization</span>
+                            <span id="perfBedUtilVal" style="font-weight: 700; color: #d97706;">70%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="perfBedUtilBar" style="width: 0%; background: #d97706;"></div>
+                        </div>
+                        <small style="color: #64748b; font-size: 11px; margin-top: 6px; display: block;">Occupied vs Available capacity</small>
+                    </div>
+
+                    <div class="perf-metric-box">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; font-size: 14px; color: #1e293b;">Revenue Growth</span>
+                            <span id="perfRevGrowthVal" style="font-weight: 700; color: #059669;">92%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="perfRevGrowthBar" style="width: 0%; background: #059669;"></div>
+                        </div>
+                        <small style="color: #64748b; font-size: 11px; margin-top: 6px; display: block;">Billing collection efficiency</small>
+                    </div>
+
+                    <div class="perf-metric-box">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; font-size: 14px; color: #1e293b;">Doctor Availability</span>
+                            <span id="perfDocAvailVal" style="font-weight: 700; color: #7c3aed;">95%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="perfDocAvailBar" style="width: 0%; background: #7c3aed;"></div>
+                        </div>
+                        <small style="color: #64748b; font-size: 11px; margin-top: 6px; display: block;">Active roster compliance</small>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODALS FOR PROFILE & PASSWORD -->
+    <div class="patient-message-overlay" id="profileModal">
+        <div class="patient-message-box profile-modal-box">
+            <div class="modal-header">
+                <h2>Admin Profile</h2>
+                <button class="close-modal-btn" id="closeProfileModal">&times;</button>
+            </div>
+            <form id="adminProfileForm">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="editAdminName" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="editAdminEmail" required>
+                </div>
+                <div class="input-group">
+                    <label>Role</label>
+                    <input type="text" id="editAdminRole" readonly style="background: #f1f5f9; cursor: not-allowed;">
+                </div>
+                <div class="form-actions" style="margin-top: 20px; gap: 10px;">
+                    <button type="button" class="cancel-btn" id="cancelProfileBtn">Cancel</button>
+                    <button type="submit" class="add-patient-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="patient-message-overlay" id="passwordModal">
+        <div class="patient-message-box profile-modal-box">
+            <div class="modal-header">
+                <h2>Change Password</h2>
+                <button class="close-modal-btn" id="closePasswordModal">&times;</button>
+            </div>
+            <form id="changePasswordForm">
+                <div class="input-group">
+                    <label>Current Password</label>
+                    <input type="password" id="currentPassword" placeholder="Enter current password" required>
+                </div>
+                <div class="input-group">
+                    <label>New Password</label>
+                    <input type="password" id="newPassword" placeholder="Enter new password" required>
+                </div>
+                <div class="input-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
+                </div>
+                <p id="passwordMsg" style="font-size: 13px; margin-bottom: 12px; font-weight: 600;"></p>
+                <div class="form-actions" style="gap: 10px;">
+                    <button type="button" class="cancel-btn" id="cancelPasswordBtn">Cancel</button>
+                    <button type="submit" class="add-patient-btn">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/profile.js"></script>
+    <script src="js/reports.js"></script>
+
+</body>
+
+</html>

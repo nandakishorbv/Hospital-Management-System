@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Bed Management - Hospital Management System
+    </title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-container">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-icon">
+                🏥
+            </div>
+
+            <h2>
+                Hospital Management
+            </h2>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+
+            <a href="dashboard.html">
+    📊 Dashboard
+</a>
+
+<a href="patients.html">
+    👥 Patients
+</a>
+
+<a href="doctors.html">
+    👨‍⚕️ Doctors
+</a>
+
+<a href="appointments.html">
+    📅 Appointments
+</a>
+
+<a href="beds.html" class="active">
+    🛏️ Beds
+</a>
+
+<a href="pharmacy.html">
+    💊 Pharmacy
+</a>
+
+<a href="billing.html">
+    💰 Billing
+</a>
+
+<a href="analytics.html">
+    📈 Analytics
+</a>
+
+<a href="reports.html">
+    📑 Reports
+</a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <a href="index.html">
+                🚪 Logout
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+
+            <div>
+
+                <h1>
+                    Bed Management
+                </h1>
+
+                <p>
+                    Manage and monitor hospital beds
+                </p>
+
+            </div>
+
+
+            <div class="user-info">
+
+                <span>
+                    👤
+                </span>
+
+                <div>
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <small>
+                        Hospital Admin
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- BED STATISTICS -->
+
+        <section class="summary-cards">
+
+
+            <div class="summary-card">
+
+                <div class="card-icon">
+                    🛏️
+                </div>
+
+                <div>
+
+                    <h3>
+                        Total Beds
+                    </h3>
+
+                    <p id="dashboardAvailableBeds">
+                     0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon">
+                    🟢
+                </div>
+
+                <div>
+
+                    <h3>
+                        Available Beds
+                    </h3>
+
+                    <p id="availableBeds">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon">
+                    🔴
+                </div>
+
+                <div>
+
+                    <h3>
+                        Occupied Beds
+                    </h3>
+
+                    <p id="occupiedBeds">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon">
+                    🔧
+                </div>
+
+                <div>
+
+                    <h3>
+                        Maintenance
+                    </h3>
+
+                    <p id="maintenanceBeds">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ADD NEW BED -->
+
+        <section class="dashboard-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Add New Bed
+                    </h2>
+
+                    <p>
+                        Enter bed information below
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form id="bedForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- BED ID -->
+
+                    <div class="form-group">
+
+                        <label for="bedId">
+                            Bed ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bedId"
+                            placeholder="Example: B001"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- WARD -->
+
+                    <div class="form-group">
+
+                        <label for="bedWard">
+                            Ward
+                        </label>
+
+                        <select id="bedWard" required>
+
+                            <option value="">
+                                Select Ward
+                            </option>
+
+                            <option value="General Ward">
+                                General Ward
+                            </option>
+
+                            <option value="ICU">
+                                ICU
+                            </option>
+
+                            <option value="Private Ward">
+                                Private Ward
+                            </option>
+
+                            <option value="Emergency Ward">
+                                Emergency Ward
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- ROOM -->
+
+                    <div class="form-group">
+
+                        <label for="bedRoom">
+                            Room Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bedRoom"
+                            placeholder="Example: G-101"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- BED TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="bedType">
+                            Bed Type
+                        </label>
+
+                        <select id="bedType" required>
+
+                            <option value="">
+                                Select Bed Type
+                            </option>
+
+                            <option value="General">
+                                General
+                            </option>
+
+                            <option value="ICU">
+                                ICU
+                            </option>
+
+                            <option value="Private">
+                                Private
+                            </option>
+
+                            <option value="Emergency">
+                                Emergency
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="bedStatus">
+                            Bed Status
+                        </label>
+
+                        <select id="bedStatus" required>
+
+                            <option value="">
+                                Select Status
+                            </option>
+
+                            <option value="Available">
+                                Available
+                            </option>
+
+                            <option value="Occupied">
+                                Occupied
+                            </option>
+
+                            <option value="Maintenance">
+                                Maintenance
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- PATIENT -->
+
+                    <div class="form-group">
+
+                        <label for="bedPatient">
+                            Patient Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bedPatient"
+                            placeholder="Enter patient name if occupied"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+
+                    <button
+                        type="reset"
+                        class="cancel-btn"
+                    >
+                        Clear
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-patient-btn"
+                    >
+                        🛏️ Add Bed
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+
+
+        <!-- BED LIST -->
+
+        <section class="dashboard-card">
+
+
+            <div class="patient-toolbar">
+
+                <div>
+
+                    <h2>
+                        Bed Details
+                    </h2>
+
+                    <p>
+                        Current bed allocation and status
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="patient-search">
+
+                <input
+                    type="text"
+                    id="bedSearch"
+                    placeholder="Search by Bed ID, ward, room or patient..."
+                >
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-container">
+
+
+                <table id="bedTable">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Bed ID
+                            </th>
+
+                            <th>
+                                Ward
+                            </th>
+
+                            <th>
+                                Room
+                            </th>
+
+                            <th>
+                                Bed Type
+                            </th>
+
+                            <th>
+                                Patient
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="bedTableBody">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+
+            <!-- EMPTY MESSAGE -->
+
+            <div
+                id="noBedsMessage"
+                class="no-patients-message"
+            >
+
+                <div>
+                    🛏️
+                </div>
+
+                <h3>
+                    No Beds Found
+                </h3>
+
+                <p>
+                    Add a bed to see the record here.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- SUCCESS POPUP -->
+
+<div
+    id="bedMessage"
+    class="patient-message-overlay"
+>
+
+
+    <div class="patient-message-box">
+
+
+        <div class="message-icon">
+            ✓
+        </div>
+
+
+        <h2>
+            Bed Added Successfully
+        </h2>
+
+
+        <p>
+            The bed has been successfully registered.
+        </p>
+
+
+        <div class="message-actions">
+
+
+            <button
+                type="button"
+                id="closeBedMessage"
+                class="close-message-btn"
+            >
+                Done
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script src="js/beds.js"></script>
+
+
+</body>
+
+</html>

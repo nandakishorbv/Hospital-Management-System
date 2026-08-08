@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Management - Hospital Management System</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-icon">🏥</div>
+        <h2>Hospital Management</h2>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="patients.html" class="active">👥 Patients</a>
+        <a href="doctors.html">👨‍⚕️ Doctors</a>
+        <a href="appointments.html">📅 Appointments</a>
+        <a href="beds.html">🛏️ Beds</a>
+        <a href="pharmacy.html">💊 Pharmacy</a>
+        <a href="billing.html">💰 Billing</a>
+        <a href="analytics.html">📈 Analytics</a>
+        <a href="reports.html">📑 Reports</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html">🚪 Logout</a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- HEADER -->
+      <header class="top-header">
+        <div>
+          <h1>Patient Management</h1>
+          <p>Manage and view registered patients</p>
+        </div>
+
+        <div class="user-info">
+          <span>👤</span>
+          <div>
+            <strong>Administrator</strong>
+            <small>Hospital Admin</small>
+          </div>
+        </div>
+      </header>
+
+      <!-- PATIENT STATISTICS / SUMMARY CARDS -->
+      <section class="summary-cards">
+
+        <!-- TOTAL PATIENTS -->
+        <div class="summary-card patient-filter-card active-card" data-filter="All">
+          <div class="card-icon">👥</div>
+          <div>
+            <h3>Total Patients</h3>
+            <p id="totalPatients">0</p>
+          </div>
+        </div>
+
+        <!-- NEW PATIENTS -->
+        <div class="summary-card patient-filter-card" data-filter="New">
+          <div class="card-icon">🆕</div>
+          <div>
+            <h3>New Patients</h3>
+            <p id="newPatients">0</p>
+          </div>
+        </div>
+
+        <!-- ADMITTED -->
+        <div class="summary-card patient-filter-card" data-filter="Admitted">
+          <div class="card-icon">🏥</div>
+          <div>
+            <h3>Admitted</h3>
+            <p id="admittedPatients">0</p>
+          </div>
+        </div>
+
+        <!-- DISCHARGED -->
+        <div class="summary-card patient-filter-card" data-filter="Discharged">
+          <div class="card-icon">✓</div>
+          <div>
+            <h3>Discharged</h3>
+            <p id="dischargedPatients">0</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- PATIENT MANAGEMENT CARD -->
+      <section class="dashboard-card patient-management-card">
+
+        <div class="patient-toolbar" style="margin-bottom: 16px;">
+          <div>
+            <h2>Registered Patients</h2>
+            <p>Patient records and information</p>
+          </div>
+        </div>
+
+        <!-- SIDE-BY-SIDE SEARCH BAR & ADD PATIENT BUTTON -->
+        <div class="search-action-bar" style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+          <div class="patient-search" style="flex: 1; margin-bottom: 0;">
+            <input type="text" id="patientSearch" placeholder="Search by patient name or ID..." style="width: 100%;">
+          </div>
+
+          <a href="./add-patient.html" class="add-patient-btn" style="white-space: nowrap; height: 42px; margin: 0; display: inline-flex; align-items: center;">+ Add Patient</a>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-container">
+          <table id="patientTable">
+            <thead>
+              <tr>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Blood Group</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="patientTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- EMPTY MESSAGE -->
+        <div id="noPatientsMessage" class="no-patients-message">
+          <div>👥</div>
+          <h3>No Patients Found</h3>
+          <p>No patient records match your selection.</p>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="./js/patients.js"></script>
+
+</body>
+
+</html>
