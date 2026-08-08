@@ -10,15 +10,17 @@ document.addEventListener("DOMContentLoaded", function () {
             // 1. STOP THE DEFAULT FORM PAGE RELOAD
             e.preventDefault();
 
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
+            const username = usernameInput ? usernameInput.value.trim() : "";
+            const password = passwordInput ? passwordInput.value.trim() : "";
 
             // 2. CHECK CREDENTIALS (You can change "admin" / "admin123" to anything you like)
             if (username === "admin" && password === "admin123") {
                 
-                // Display success message
-                loginMessage.style.color = "#4ade80"; // Crisp Green
-                loginMessage.textContent = "✓ Authentication successful!";
+                // Display success message if element exists
+                if (loginMessage) {
+                    loginMessage.style.color = "#4ade80"; // Crisp Green
+                    loginMessage.textContent = "✓ Authentication successful!";
+                }
 
                 // Show the smooth loading screen overlay
                 if (loadingScreen) {
@@ -29,15 +31,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("username", username);
 
-                // 3. REDIRECT TO DASHBOARD AFTER 1.2 SECONDS
+                // 3. REDIRECT TO DASHBOARD AFTER 1.2 SECONDS (Using explicit relative path for GitHub Pages compatibility)
                 setTimeout(function () {
-                    window.location.href = "dashboard.html";
+                    window.location.href = "./dashboard.html";
                 }, 1200);
 
             } else {
-                // Display error message
-                loginMessage.style.color = "#f87171"; // Warm Red
-                loginMessage.textContent = "Invalid username or password!";
+                // Display error message if element exists
+                if (loginMessage) {
+                    loginMessage.style.color = "#f87171"; // Warm Red
+                    loginMessage.textContent = "Invalid username or password!";
+                }
             }
         });
     }
