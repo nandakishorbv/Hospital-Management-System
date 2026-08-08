@@ -670,6 +670,7 @@ tbody tr:hover td {
         padding: 20px;
     }
 }
+
 /* ======================================================
    PRINT STYLES FOR REPORTS
 ====================================================== */
@@ -697,6 +698,7 @@ tbody tr:hover td {
         background: #ffffff !important;
     }
 }
+
 /* ======================================================
    SEARCH BAR & ACTION BUTTON FLEX ROW
 ====================================================== */
@@ -718,27 +720,24 @@ tbody tr:hover td {
 
 .search-action-bar .add-patient-btn {
     white-space: nowrap;
-    height: 42px; /* Aligns visually with standard input height */
+    height: 42px;
     margin: 0;
 }
+
 /* ======================================================
    ADMIN PROFILE HEADER & DROPDOWN STYLES
 ====================================================== */
-
-/* Header Right Alignment Wrapper */
 .header-right {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-/* Admin Profile Container */
 .admin-profile-container {
     position: relative;
     user-select: none;
 }
 
-/* User Info Card Trigger */
 .top-header .user-info {
     display: flex;
     align-items: center;
@@ -758,7 +757,6 @@ tbody tr:hover td {
     transform: translateY(-1px);
 }
 
-/* Dropdown Arrow Animation */
 .dropdown-arrow {
     font-size: 11px;
     color: var(--text-secondary, #64748b);
@@ -771,7 +769,6 @@ tbody tr:hover td {
     color: var(--primary, #0284c7);
 }
 
-/* Profile Dropdown Menu Card */
 .profile-dropdown-menu {
     position: absolute;
     top: calc(100% + 10px);
@@ -804,7 +801,6 @@ tbody tr:hover td {
     }
 }
 
-/* Dropdown Content */
 .dropdown-header {
     padding: 10px 18px 8px;
 }
@@ -854,7 +850,6 @@ tbody tr:hover td {
     transform: translateX(2px);
 }
 
-/* Logout Specific Styling */
 .dropdown-item.logout-item {
     color: #ef4444;
 }
@@ -871,7 +866,6 @@ tbody tr:hover td {
 /* ======================================================
    ADMIN MODALS & POPUP ANIMATIONS
 ====================================================== */
-
 .profile-modal-box {
     text-align: left;
     width: 420px;
@@ -926,10 +920,10 @@ tbody tr:hover td {
     color: var(--text-primary, #0f172a) !important;
     transform: none !important;
 }
+
 /* ======================================================
    ANALYTICS DASHBOARD ADDITIONS - HEALTHCARE ERP THEME
 ====================================================== */
-
 .analytics-summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -979,69 +973,14 @@ tbody tr:hover td {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.chart-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 /* ======================================================
    REPORTS MODULE STYLES - HEALTHCARE ERP THEME
 ====================================================== */
-
-:root {
-    --reports-primary: #0284c7;
-    --reports-teal: #0d9488;
-    --reports-green: #10b981;
-    --reports-purple: #8b5cf6;
-    --reports-orange: #f59e0b;
-    --reports-bg: #f8fafc;
-    --card-bg: #ffffff;
-    --shadow-soft: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
-    --shadow-hover: 0 20px 35px -10px rgba(2, 132, 199, 0.15);
-}
-
-/* Page Fade-In Animation */
-body {
-    animation: fadeInPage 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fadeInPage {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Summary Card Entrance Animation */
-.stat-card-anim {
-    opacity: 0;
-    animation: slideUpCard 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: var(--shadow-soft);
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.stat-card-anim:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-    border-color: rgba(2, 132, 199, 0.3);
-}
-
-@keyframes slideUpCard {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Report Section Cards */
 .report-section-card {
-    background: var(--card-bg);
+    background: #ffffff;
     border-radius: 18px;
     padding: 24px;
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
     border: 1px solid rgba(226, 232, 240, 0.8);
     transition: all 0.3s ease;
     opacity: 0;
@@ -1049,7 +988,7 @@ body {
 }
 
 .report-section-card:hover {
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 20px 35px -10px rgba(2, 132, 199, 0.15);
 }
 
 @keyframes fadeInUpSection {
@@ -1057,7 +996,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Report Timestamp Badge */
 .report-timestamp-badge {
     display: inline-flex;
     align-items: center;
@@ -1070,7 +1008,6 @@ body {
     border-radius: 20px;
 }
 
-/* Performance Overview Progress Boxes */
 .perf-metric-box {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -1099,77 +1036,4 @@ body {
     border-radius: 10px;
     width: 0%;
     transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ======================================================
-   PRINT OPTIMIZATION (MEDIA PRINT RULES)
-====================================================== */
-@media print {
-    /* Hide sidebar, navigation, search filters, and export action buttons */
-    .sidebar,
-    .top-header .header-right,
-    .no-print,
-    .export-toolbar-card,
-    .filter-toolbar-card,
-    .admin-profile-container {
-        display: none !important;
-    }
-
-    /* Reset body and layout for full width printing */
-    body {
-        background: #ffffff !important;
-        color: #000000 !important;
-        animation: none !important;
-    }
-
-    .dashboard-container {
-        display: block !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .main-content {
-        margin: 0 !important;
-        padding: 10px !important;
-        width: 100% !important;
-    }
-
-    /* Print Header Banner */
-    .top-header {
-        border-bottom: 2px solid #000 !important;
-        padding-bottom: 15px !important;
-        margin-bottom: 20px !important;
-        display: block !important;
-    }
-
-    .top-header h1::before {
-        content: "🏥 HOSPITAL MANAGEMENT SYSTEM - OFFICIAL REPORT\A";
-        white-space: pre;
-        font-size: 14px;
-        font-weight: bold;
-        color: #0284c7;
-    }
-
-    /* Card styling adjustments for crisp print output */
-    .dashboard-card,
-    .report-section-card,
-    .performance-overview-card,
-    .summary-card {
-        box-shadow: none !important;
-        border: 1px solid #cbd5e1 !important;
-        break-inside: avoid;
-        margin-bottom: 15px !important;
-        background: #fff !important;
-    }
-
-    table {
-        width: 100% !important;
-        border-collapse: collapse !important;
-    }
-
-    th, td {
-        border: 1px solid #94a3b8 !important;
-        padding: 8px !important;
-        font-size: 11px !important;
-    }
 }
